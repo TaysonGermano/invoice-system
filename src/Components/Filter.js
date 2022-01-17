@@ -1,8 +1,21 @@
 import { createUseStyles } from "react-jss";
 
 export default function Filter() {
+  const useStyles = createUseStyles({
+    Filter: {
+      "& select": {
+        padding: "10px 20px",
+        backgroundColor: "inherit",
+        border: "none",
+        borderBottom: "1px solid #7C5DFA",
+      },
+    },
+  });
+
+  const classes = useStyles();
+
   return (
-    <div className="Filter">
+    <div className={classes.Filter}>
       <select>
         <option value="Filter" selected>
           Filter by status
