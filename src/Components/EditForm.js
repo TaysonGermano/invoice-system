@@ -3,50 +3,43 @@ import { useFormik } from "formik";
 import FormStyles from "./FormStyles";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Form(props) {
-  // items counter
-  const [items, setItems] = useState([]);
+function EditForm(props) {
+  const fetchData = JSON.parse(window.localStorage.getItem("invoices"));
+  const getInvoice = fetchData.filter((i) => i.id === props.id);
 
   // formik
   const formik = useFormik({
-    initialValues: {
-      id: "",
-      street: "",
-      city: "",
-      post: "",
-      country: "",
-      clientName: "",
-      clientEmail: "",
-      clientStreet: "",
-      clientCity: "",
-      clientPost: "",
-      clientCountry: "",
-      date: "",
-      payment: "",
-      description: "",
-      items: "",
-      granTotal: 0,
-      status: "Pending",
-    },
-    onSubmit: (values, { resetForm }) => {
-      const newItems = [];
+    initialValues: { ...getInvoice[0] },
 
+    onSubmit: (values) => {
+      // Adding news items to the list
+      const newItems = [];
       for (let elements of items) {
         elements.total = elements.qty * elements.price;
         newItems.push(elements);
         formik.values.granTotal += elements.total;
       }
-
-      formik.values.id = uuidv4();
       formik.values.items = [...newItems];
 
+      //Removing old data from the database
+      const newData = fetchData.filter((i) => i.id !== props.id);
+
+      //Saving new data to the database
+      const database = [values, ...newData];
+      window.localStorage.setItem("invoices", JSON.stringify(database));
+
+      //re-render the invoice
       props.data(values);
-      setItems([]);
-      resetForm();
+
+      //Close the form
       props.formStatus();
     },
   });
 
+  // items counter
+  const [items, setItems] = useState([...formik.values.items]);
+
+  // CSS Classes
   const classes = FormStyles();
 
   return (
@@ -55,7 +48,10 @@ export default function Form(props) {
       style={props.hide ? { display: "none" } : { display: "block" }}
     >
       <div className={classes.Form}>
-        <h1>Create Invoice</h1>
+        <h1>
+          Edit <span>#</span>
+          {props.id.slice(0, 5).toUpperCase()}
+        </h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="wrapper">
             <section className="Bill-from">
@@ -360,19 +356,7 @@ export default function Form(props) {
               </button>
             </div>
             <div className="btn">
-              <button
-                type="submit"
-                className="draft-btn"
-                name="save"
-                onClick={() => (formik.values.status = "Draft")}
-              >
-                Save as Draft
-              </button>
-              <button
-                type="submit"
-                className="save-btn"
-                onClick={() => (formik.values.status = "Pending")}
-              >
+              <button type="submit" className="save-btn">
                 Save & Send
               </button>
             </div>
@@ -382,3 +366,5 @@ export default function Form(props) {
     </div>
   );
 }
+
+export default EditForm;

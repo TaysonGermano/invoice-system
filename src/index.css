@@ -6,9 +6,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f8f8fb;
+  transition: all 0.4s ease-in-out;
+  color: rgb(136, 142, 176);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.dark {
+  background-color: #141625;
+  color: rgb(223, 227, 250);
 }
