@@ -11,6 +11,7 @@ export default function Filter(props) {
       },
       ".dark & select": {
         color: "#fff",
+        backgroundColor: "#141625",
       },
     },
   });

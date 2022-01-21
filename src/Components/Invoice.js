@@ -106,6 +106,34 @@ export default function Invoice(props) {
       "& .Invoice-arrow": {
         color: "#7C5DFA",
       },
+
+      "@media screen and (max-width: 730px)": {
+        "& .details": {
+          width: "350px",
+        },
+
+        "& .price-status": {
+          width: "230px",
+          marginLeft: "15px",
+
+          "& .Invoice-status": {
+            margin: "0 10px",
+          },
+        },
+      },
+
+      "@media screen and (max-width: 590px)": {
+        "&": {
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: "80px",
+
+          "& .Invoice-arrow": {
+            display: "none",
+          },
+        },
+      },
     },
   });
 

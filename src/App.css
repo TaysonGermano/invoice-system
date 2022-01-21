@@ -1,7 +1,15 @@
 .container {
-  padding: 3em 20em;
+  padding: 3em 0;
+  margin-left: 130px;
 }
 
 .App {
   position: relative;
+}
+
+@media screen and (max-width: 890px) {
+  .container {
+    padding: 3em 1rem;
+    margin: 0px;
+  }
 }

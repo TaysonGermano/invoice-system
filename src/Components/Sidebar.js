@@ -37,6 +37,35 @@ export default function Sidebar() {
           width: "60px",
         },
       },
+
+      "@media screen and (max-width: 890px)": {
+        "&": {
+          height: "80px",
+          width: "100%",
+          flexDirection: "row",
+          alignItems: "center",
+          position: "relative",
+
+          "& .Sidebar-Logo": {
+            width: "90px",
+            height: "80px",
+
+            "& img": {
+              width: "30px",
+            },
+          },
+
+          "& .bottom-elements": {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "0px",
+            marginRight: "30px",
+            width: "100px",
+            height: "100%",
+          },
+        },
+      },
     },
   });
 

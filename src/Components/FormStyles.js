@@ -23,7 +23,7 @@ export default function FormStyles() {
       backgroundColor: "white",
       padding: "20px 50px",
       borderRadius: "0 50px 50px 0",
-      position: "relative",
+      position: "fixed",
       left: "130px",
       "& h1": {
         marginTop: "0",
@@ -35,6 +35,7 @@ export default function FormStyles() {
         "& input": {
           backgroundColor: "#1E2139",
           border: "1px solid #1E2139",
+          color: "#fff",
         },
 
         "& .itemList": {
@@ -135,10 +136,10 @@ export default function FormStyles() {
         },
 
         "& .discart-btn": {
-          color: "#99C0ED",
-          backgroundColor: "#F9FAFE",
+          color: "#fff",
+          backgroundColor: "rgb(236, 87, 87)",
           "&:hover": {
-            backgroundColor: "#DFE3FA",
+            opacity: "0.8",
           },
         },
 
@@ -159,9 +160,34 @@ export default function FormStyles() {
           },
         },
       },
-    },
-    ".dark input": {
-      backgroundColor: "#1E2139",
+
+      ".dark & #payment": {
+        color: "#fff",
+        backgroundColor: "#1E2139",
+      },
+
+      "@media screen and (max-width: 890px)": {
+        "&": {
+          borderRadius: "10px",
+          height: "600px",
+          width: "90%",
+          position: "relative",
+          left: "0",
+          top: "100px",
+          margin: "20px auto",
+
+          "& .responsive .second-columm": {
+            margin: "0px 10px",
+          },
+        },
+      },
+
+      "@media screen and (max-width: 750px)": {
+        "& .column-flex": {
+          flexDirection: "column",
+          alignItems: "flex-start !important",
+        },
+      },
     },
   });
 

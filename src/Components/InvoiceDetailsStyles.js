@@ -4,6 +4,9 @@ export default function InvoiceDetailsStyles() {
   const useStyles = createUseStyles({
     InvoiceDetails: {
       fontSize: "14px",
+      maxWidth: "700px",
+      minWidth: "450px",
+      margin: "0 auto",
       "& .back": {
         border: "none",
         backgroundColor: "inherit",
@@ -224,6 +227,21 @@ export default function InvoiceDetailsStyles() {
 
       ".dark & .back": {
         color: "#fff",
+      },
+
+      "@media screen and (max-width: 560px)": {
+        "& .option": {
+          flexWrap: "wrap",
+
+          "& .btns": {
+            marginTop: "20px",
+
+            "& button": {
+              marginLeft: "0 !important",
+              marginRight: "10px",
+            },
+          },
+        },
       },
     },
   });

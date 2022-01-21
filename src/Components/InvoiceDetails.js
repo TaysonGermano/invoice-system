@@ -74,7 +74,7 @@ export default function InvoiceDetails(props) {
               <span></span> {invoice[0].status}
             </div>
           </div>
-          <div className="btns">
+          <div className="btns flexbox">
             <button className="edit" onClick={editItem}>
               Edit
             </button>

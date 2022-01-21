@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Theme() {
-  const [darkMode, setDarkMode] = useState(false);
+  window.localStorage.getItem("mode") === null &&
+    window.localStorage.setItem("mode", JSON.stringify(false));
+  const [darkMode, setDarkMode] = useState("");
 
   const theme = document.querySelector("body");
-
+  darkMode ? theme.classList.add("dark") : theme.classList.remove("dark");
   const light = <i className="fas fa-sun"></i>;
   const dark = <i className="fas fa-moon"></i>;
+
+  useEffect(() => {
+    setDarkMode(JSON.parse(window.localStorage.getItem("mode")));
+  }, []);
 
   return (
     <div
       onClick={() => {
         theme.classList.toggle("dark");
+        const mode = !darkMode;
         setDarkMode(!darkMode);
+        window.localStorage.setItem("mode", JSON.stringify(mode));
       }}
       style={{ color: "#7E88C3", fontSize: "20px", cursor: "pointer" }}
     >
