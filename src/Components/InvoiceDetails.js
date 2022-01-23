@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import moment from "moment";
 import Styles from "./InvoiceDetailsStyles";
+import { gsap } from "gsap";
 import EditForm from "./EditForm";
 
 export default function InvoiceDetails(props) {
@@ -54,6 +55,19 @@ export default function InvoiceDetails(props) {
     setInvoice([values]);
   };
 
+  useEffect(() => {
+    gsap.from(an.current, {
+      duration: 1.5,
+      x: "100%",
+    });
+  }, []);
+
+  const an = useRef();
+
+  document.title = `Invoice #${invoice[0].id
+    .slice(0, 5)
+    .toUpperCase()} - Invoice App`;
+
   return (
     <div>
       <EditForm
@@ -63,7 +77,7 @@ export default function InvoiceDetails(props) {
         data={getDataHandler}
       />
 
-      <div className={classes.InvoiceDetails}>
+      <div className={classes.InvoiceDetails} ref={an}>
         <button className="back" onClick={() => navigate(-1)}>
           <i className="fas fa-chevron-left"></i> Go back
         </button>

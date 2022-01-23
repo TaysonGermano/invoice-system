@@ -2,13 +2,9 @@ import { useState, useEffect } from "react";
 import Invoices from "./Components/Invoices";
 import Sidebar from "./Components/Sidebar";
 import Form from "./Components/Form";
+import PageNotFound from "./Components/PageNotFound";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import InvoiceDetails from "./Components/InvoiceDetails";
 import "./App.css";
 
@@ -46,7 +42,7 @@ function App() {
               element={<Invoices formHandler={hideFormHandler} fetch={data} />}
             />
             <Route path="/id/:id" element={<InvoiceDetails />} />
-            <Route to="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       </div>

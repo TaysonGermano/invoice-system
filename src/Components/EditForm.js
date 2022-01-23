@@ -13,10 +13,12 @@ function EditForm(props) {
 
     onSubmit: (values) => {
       // Adding news items to the list
+      formik.values.granTotal = 0;
       const newItems = [];
       for (let elements of items) {
         elements.total = elements.qty * elements.price;
         newItems.push(elements);
+
         formik.values.granTotal += elements.total;
       }
       formik.values.items = [...newItems];

@@ -7,6 +7,7 @@ export default function InvoiceDetailsStyles() {
       maxWidth: "700px",
       minWidth: "450px",
       margin: "0 auto",
+      transitionTimingFunction: "ease-in-out",
       "& .back": {
         border: "none",
         backgroundColor: "inherit",

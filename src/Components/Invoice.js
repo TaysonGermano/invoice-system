@@ -1,4 +1,6 @@
 import { createUseStyles } from "react-jss";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 export default function Invoice(props) {
   const useStyles = createUseStyles({
@@ -139,8 +141,20 @@ export default function Invoice(props) {
 
   const classes = useStyles();
 
+  //animation reference
+  const invAn = useRef();
+
+  //useEffect
+
+  useEffect(() => {
+    gsap.from(invAn.current, {
+      duration: 0.5,
+      y: "-100%",
+    });
+  }, []);
+
   return (
-    <div className={classes.Invoice}>
+    <div className={classes.Invoice} ref={invAn}>
       <div className="details">
         <div className="Invoice-id">
           <span>#</span>
