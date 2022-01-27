@@ -1,27 +1,12 @@
-import { createUseStyles } from "react-jss";
+import FilterStyles from "../Styles/FilterStyles";
 
 export default function Filter(props) {
-  const useStyles = createUseStyles({
-    Filter: {
-      "& select": {
-        padding: "10px 20px",
-        backgroundColor: "inherit",
-        border: "none",
-        borderBottom: "1px solid #7C5DFA",
-      },
-      ".dark & select": {
-        color: "#fff",
-        backgroundColor: "#141625",
-      },
-    },
-  });
-
   //change state
   const changeState = (e) => {
     props.change(e.target.value);
   };
 
-  const classes = useStyles();
+  const classes = FilterStyles();
 
   return (
     <div className={classes.Filter}>

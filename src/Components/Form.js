@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import FormStyles from "./FormStyles";
+import FormStyles from "../Styles/FormStyles";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Form(props) {
