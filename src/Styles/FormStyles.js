@@ -50,10 +50,27 @@ export default function FormStyles() {
         height: "70vh",
         width: "100%",
         overflow: "scroll",
+        overflowX: "hidden",
         margin: {
           bottom: "20px",
           top: "30px",
         },
+
+        "&::-webkit-scrollbar-track": {
+          boxShadow: "inset 0 0 6px rgba(0,0,0,0.3)",
+          backgroundColor: "#F5F5F5",
+        },
+
+        "&::-webkit-scrollbar": {
+          width: "8px",
+          backgroundColor: "#F5F5F5",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+          boxShadow: "inset 0 0 6px rgba(0,0,0,.3)",
+          backgroundColor: "#7C5DFA",
+        },
+
         "& .Title": {
           color: "#7C5DFA",
           fontWeight: "600",
