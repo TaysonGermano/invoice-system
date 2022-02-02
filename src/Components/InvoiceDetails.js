@@ -4,10 +4,11 @@ import moment from "moment";
 import { gsap } from "gsap";
 import EditForm from "./EditForm";
 import InvoiceDetailsStyles from "../Styles/InvoiceDetailsStyles";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
 export default function InvoiceDetails(props) {
   //localstorage
-  const data = JSON.parse(window.localStorage.getItem("invoices"));
+  const [data, setData] = useLocalStorage("invoices");
 
   //Parameters
   const params = useParams();
@@ -32,14 +33,14 @@ export default function InvoiceDetails(props) {
     }
 
     const newInvoice = changedData.filter((i) => i.id === params.id);
-    window.localStorage.setItem("invoices", JSON.stringify(changedData));
+    setData(changedData);
     setInvoice(newInvoice);
   };
 
   //Delete function
   const deleteItem = () => {
-    const newData = JSON.stringify(data.filter((i) => i.id !== params.id));
-    window.localStorage.setItem("invoices", newData);
+    const newData = data.filter((i) => i.id !== params.id);
+    setData(newData);
     navigate(-1);
   };
 

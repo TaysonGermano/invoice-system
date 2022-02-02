@@ -13,7 +13,7 @@ export default function Invoices(props) {
 
   //State to hold the data
   const [permanent, setPermanent] = useLocalStorage("invoices", []);
-  const data = JSON.parse(window.localStorage.getItem("invoices"));
+  const [data] = useLocalStorage("invoices");
   const [invoices, setInvoices] = useState(data);
 
   //filtering
