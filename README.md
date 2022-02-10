@@ -57,4 +57,4 @@ State managements and custom hooks was one of the key things for this project an
 
 ## Author
 
-- Website - Tyson Monteiro
+- Tyson Monteiro
