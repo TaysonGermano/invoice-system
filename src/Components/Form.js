@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFormik } from "formik";
 import FormStyles from "../Styles/FormStyles";
 import { v4 as uuidv4 } from "uuid";
+import { FormContext } from "../Context/showForm";
 
 export default function Form(props) {
   // items counter
   const [items, setItems] = useState([]);
 
+  const { state, changeState } = useContext(FormContext);
   // formik
   const formik = useFormik({
     initialValues: {
@@ -49,7 +51,7 @@ export default function Form(props) {
 
   const classes = FormStyles();
 
-  if (!props.hide)
+  if (!state)
     return (
       <div className={classes.Overlay}>
         <div className={classes.Form}>
@@ -352,7 +354,7 @@ export default function Form(props) {
                 <button
                   type="button"
                   className="discart-btn"
-                  onClick={props.formStatus}
+                  onClick={changeState}
                 >
                   Discart
                 </button>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import Filter from "./Filter";
 import NewInvoice from "./NewInvoice";
 import Invoice from "./Invoice";
@@ -7,9 +7,11 @@ import useLocalStorage from "../Hooks/useLocalStorage";
 import { gsap } from "gsap";
 import checkLocalStorage from "../Hooks/checkLocalStorage";
 import InvoicesStyle from "../Styles/InvoicesStyles";
+import { FormContext } from "../Context/showForm";
 
 export default function Invoices(props) {
   checkLocalStorage();
+  const { changeState } = useContext(FormContext);
 
   //State to hold the data
   const [permanent, setPermanent] = useLocalStorage("invoices", []);
@@ -52,7 +54,7 @@ export default function Invoices(props) {
         </div>
         <div className="second-columm">
           <Filter change={filterHandler} />
-          <NewInvoice showForm={props.formHandler} />
+          <NewInvoice showForm={changeState} />
         </div>
       </div>
       {invoices.map((d) => (
