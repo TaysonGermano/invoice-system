@@ -1,6 +1,7 @@
 .container {
   padding: 3em 0;
   margin-left: 130px;
+  overflow: hidden;
 }
 
 .App {
