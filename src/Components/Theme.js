@@ -6,7 +6,6 @@ export default function Theme() {
   const [darkMode, setDarkMode] = useState("");
 
   const theme = document.querySelector("body");
-  darkMode ? theme.classList.add("dark") : theme.classList.remove("dark");
   const light = <i className="fas fa-sun"></i>;
   const dark = <i className="fas fa-moon"></i>;
 

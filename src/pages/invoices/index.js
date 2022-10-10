@@ -1,22 +1,27 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import Filter from "./Filter";
-import NewInvoice from "./NewInvoice";
-import Invoice from "./Invoice";
-import { Link } from "react-router-dom";
-import useLocalStorage from "../Hooks/useLocalStorage";
+import Filter from "../../Components/Filter";
+import NewInvoice from "../../Components/NewInvoice";
+import Invoice from "../../Components/Invoice";
+import { Link, useNavigate } from "react-router-dom";
+import useLocalStorage from "../../Hooks/useLocalStorage";
 import { gsap } from "gsap";
-import checkLocalStorage from "../Hooks/checkLocalStorage";
-import InvoicesStyle from "../Styles/InvoicesStyles";
-import { FormContext } from "../Context/showForm";
+import checkLocalStorage from "../../Hooks/checkLocalStorage";
+import InvoicesStyle from "../../Styles/InvoicesStyles";
+import { FormContext } from "../../Context/showForm";
+import { Auth } from "../../Context/auth";
 
 export default function Invoices(props) {
   checkLocalStorage();
   const { changeState } = useContext(FormContext);
 
+  const auth = useContext(Auth);
+
   //State to hold the data
   const [permanent, setPermanent] = useLocalStorage("invoices", []);
   const [data] = useLocalStorage("invoices");
   const [invoices, setInvoices] = useState(data);
+
+  const navigate = useNavigate();
 
   //filtering
   const filterHandler = (value) => {
@@ -37,6 +42,10 @@ export default function Invoices(props) {
       x: "-100%",
     });
   }, []);
+
+  useEffect(() => {
+    !auth.userLoggedIn && navigate("/login");
+  }, [auth.userLoggedIn]);
 
   const an = useRef();
 

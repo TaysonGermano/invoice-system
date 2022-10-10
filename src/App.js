@@ -1,13 +1,15 @@
-import { useState, useEffect, useContext } from "react";
-import Invoices from "./Components/Invoices";
+import { useState, useEffect } from "react";
+import Invoices from "./pages/invoices";
 import Sidebar from "./Components/Sidebar";
 import Form from "./Components/Form";
-import PageNotFound from "./Components/PageNotFound";
+import PageNotFound from "./pages/404";
+import Login from "./pages/login";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import InvoiceDetails from "./Components/InvoiceDetails";
+import InvoiceDetails from "./pages/invoice-details";
 import "./App.css";
 import HideForm from "./Context/showForm";
+import AuthProvider from "./Context/auth";
 
 function App() {
   const [data, setData] = useState("");
@@ -22,20 +24,30 @@ function App() {
     };
   }, [data]);
 
+  useEffect(() => {
+    const theme = document.querySelector("body");
+    JSON.parse(window.localStorage.getItem("mode"))
+      ? theme.classList.add("dark")
+      : theme.classList.remove("dark");
+  }, []);
+
   return (
     <Router>
       <div className="App">
-        <Sidebar />
-        <HideForm>
-          <Form data={getDataHandler} />
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Invoices fetch={data} />} />
-              <Route path="/id/:id" element={<InvoiceDetails />} />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-          </div>
-        </HideForm>
+        <AuthProvider>
+          <HideForm>
+            <Sidebar />
+            <Form data={getDataHandler} />
+            <div className="container">
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/" element={<Invoices fetch={data} />} />
+                <Route path="/id/:id" element={<InvoiceDetails />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+            </div>
+          </HideForm>
+        </AuthProvider>
       </div>
     </Router>
   );
