@@ -8,6 +8,11 @@ import { Auth } from "../Context/auth";
 export default function Sidebar() {
   const auth = useContext(Auth);
 
+  const logout = () => {
+    sessionStorage.clear();
+    auth.setUserLoggedIn(false);
+  };
+
   const Component = () => {
     if (!auth.userLoggedIn) return null;
 
@@ -20,8 +25,15 @@ export default function Sidebar() {
           <div className="Sidebar-Theme">
             <Theme />
           </div>
-          <div className="Sidebar-Avatar">
+          <div className="Sidebar-Avatar" style={{ marginTop: "7px" }}>
             <Avatar />
+          </div>
+          <div
+            className="link"
+            onClick={logout}
+            style={{ cursor: "pointer", marginTop: "5px" }}
+          >
+            <small>Logout</small>
           </div>
         </div>
       </div>

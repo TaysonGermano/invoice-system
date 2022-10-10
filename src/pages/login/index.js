@@ -39,6 +39,8 @@ export default function Login() {
 
   const classes = LoginStyles();
 
+  document.title = `Login - Invoice App`;
+
   return (
     <>
       <div style={{ textAlign: "center", marginBottom: "50px" }}>
