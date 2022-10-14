@@ -47,6 +47,10 @@ export default function Invoices(props) {
     !auth.userLoggedIn && navigate("/login");
   }, [auth.userLoggedIn]);
 
+  if (!auth.userLoggedIn) {
+    navigate("/login");
+  }
+
   const an = useRef();
 
   const classes = InvoicesStyle();
