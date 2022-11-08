@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 export default function Theme() {
   window.localStorage.getItem("mode") === null &&
@@ -9,7 +9,7 @@ export default function Theme() {
   const light = <i className="fas fa-sun"></i>;
   const dark = <i className="fas fa-moon"></i>;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setDarkMode(JSON.parse(window.localStorage.getItem("mode")));
   }, []);
 

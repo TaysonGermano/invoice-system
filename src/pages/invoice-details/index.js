@@ -1,5 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState, useRef, useEffect, useContext } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useLayoutEffect,
+} from "react";
 import moment from "moment";
 import { gsap } from "gsap";
 import EditForm from "../../Components/EditForm";
@@ -59,15 +65,11 @@ export default function InvoiceDetails(props) {
     setInvoice([values]);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.from(an.current, {
       duration: 1.5,
       x: "100%",
     });
-  }, []);
-
-  useEffect(() => {
-    !auth.userLoggedIn && navigate("/login");
   }, []);
 
   const an = useRef();

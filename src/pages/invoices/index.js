@@ -1,4 +1,10 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useLayoutEffect,
+} from "react";
 import Filter from "../../Components/Filter";
 import NewInvoice from "../../Components/NewInvoice";
 import Invoice from "../../Components/Invoice";
@@ -36,20 +42,12 @@ export default function Invoices(props) {
     setInvoices(data);
   }, [props.fetch]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     gsap.from(an.current, {
       duration: 1.5,
       x: "-100%",
     });
   }, []);
-
-  useEffect(() => {
-    !auth.userLoggedIn && navigate("/login");
-  }, [auth.userLoggedIn]);
-
-  if (!auth.userLoggedIn) {
-    navigate("/login");
-  }
 
   const an = useRef();
 

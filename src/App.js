@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import Invoices from "./pages/invoices";
 import Sidebar from "./Components/Sidebar";
 import Form from "./Components/Form";
 import PageNotFound from "./pages/404";
 import Login from "./pages/login";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import InvoiceDetails from "./pages/invoice-details";
 import "./App.css";
 import HideForm from "./Context/showForm";
@@ -18,13 +23,21 @@ function App() {
     setData(values);
   };
 
+  const redirectPage = () => {
+    if (sessionStorage.getItem("user")) {
+      return null;
+    } else {
+      return <Navigate to="/login" />;
+    }
+  };
+
   useEffect(() => {
     return () => {
       setData("");
     };
   }, [data]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const theme = document.querySelector("body");
     JSON.parse(window.localStorage.getItem("mode"))
       ? theme.classList.add("dark")
@@ -41,8 +54,14 @@ function App() {
             <div className="container">
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Invoices fetch={data} />} />
-                <Route path="/id/:id" element={<InvoiceDetails />} />
+                <Route
+                  path="/"
+                  element={redirectPage() || <Invoices fetch={data} />}
+                />
+                <Route
+                  path="/id/:id"
+                  element={redirectPage() || <InvoiceDetails />}
+                />
                 <Route path="*" element={<PageNotFound />} />
               </Routes>
             </div>
