@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useState,
   useRef,
-  useEffect,
-  useContext,
   useLayoutEffect,
 } from "react";
 import moment from "moment";
@@ -11,7 +9,6 @@ import { gsap } from "gsap";
 import EditForm from "../../Components/EditForm";
 import InvoiceDetailsStyles from "../../Styles/InvoiceDetailsStyles";
 import useLocalStorage from "../../Hooks/useLocalStorage";
-import { Auth } from "../../Context/auth";
 
 export default function InvoiceDetails(props) {
   //localstorage
@@ -30,8 +27,6 @@ export default function InvoiceDetails(props) {
   const date = new Date(invoice[0].date);
   date.setDate(date.getDate() + parseInt(invoice[0].payment));
   const dateString = moment(date).format("YYYY-MM-DD");
-
-  const auth = useContext(Auth);
 
   //Mark as paid function
   const markAsPaid = () => {

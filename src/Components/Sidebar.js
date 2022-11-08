@@ -4,13 +4,16 @@ import Theme from "./Theme";
 import Logo from "../logo.svg";
 import SidebarStyles from "../Styles/SidebarStyles";
 import { Auth } from "../Context/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const auth = useContext(Auth);
+  const navigate = useNavigate();
 
   const logout = () => {
     sessionStorage.clear();
     auth.setUserLoggedIn(false);
+    navigate("/login");
   };
 
   const Component = () => {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useContext } from "react";
 import Invoices from "./pages/invoices";
 import Sidebar from "./Components/Sidebar";
 import Form from "./Components/Form";
@@ -10,6 +10,7 @@ import {
   Routes,
   Route,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 import InvoiceDetails from "./pages/invoice-details";
 import "./App.css";
@@ -21,14 +22,6 @@ function App() {
 
   const getDataHandler = (values) => {
     setData(values);
-  };
-
-  const redirectPage = () => {
-    if (sessionStorage.getItem("user")) {
-      return null;
-    } else {
-      return <Navigate to="/login" />;
-    }
   };
 
   useEffect(() => {
@@ -54,15 +47,12 @@ function App() {
             <div className="container">
               <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route
-                  path="/"
-                  element={redirectPage() || <Invoices fetch={data} />}
-                />
-                <Route
-                  path="/id/:id"
-                  element={redirectPage() || <InvoiceDetails />}
-                />
                 <Route path="*" element={<PageNotFound />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route index element={<Invoices fetch={data} />} />
+                  <Route path="/invoices" element={<Invoices fetch={data} />} />
+                  <Route path="/id/:id" element={<InvoiceDetails />} />
+                </Route>
               </Routes>
             </div>
           </HideForm>
@@ -70,6 +60,14 @@ function App() {
       </div>
     </Router>
   );
+}
+
+function ProtectedRoute({ redirectPath = "/login" }) {
+  if (window.sessionStorage.getItem("user")) {
+    return <Outlet />;
+  } else {
+    return <Navigate to={redirectPath} replace />;
+  }
 }
 
 export default App;
