@@ -1,4 +1,4 @@
-# Invoice System - Front-end
+# Invoice System 
 
 ## Table of contents
 
